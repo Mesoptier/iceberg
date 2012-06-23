@@ -14,10 +14,8 @@ class Config {
 
 		if (!file_exists($path))
 			throw new ConfigFileNotFoundException("Config file at path \"$path\" not found.");
-
-		$configData = file_get_contents($path);
 		
-		$parsedConfig = parse_ini_string($configData, true);
+		$parsedConfig = parse_ini_string(file_get_contents($path), true);
 		if (!$parsedConfig)
 			throw new InvalidConfigFileException("Invalid or corrupted config file (path is \"$path\").");
 
